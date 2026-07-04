@@ -1,0 +1,13 @@
+# Reproduce the CPU analysis + figures from grains_bayes_gpu.parquet.
+# Versions are those used in the paper; newer patch releases are generally fine.
+numpy>=1.26
+pandas>=2.0
+pyarrow>=14
+matplotlib>=3.8
+scipy>=1.11
+emcee>=3.1
+scikit-learn>=1.3        # Fig 4 (first-paper supervised NMF)
+
+# GPU sampler (bayes_gpu.py / run_scan_gpu.py) additionally needs a CUDA GPU and
+# the GPU array library imported at the top of bayes_gpu.py — not required to
+# re-analyse the released parquet or to reproduce any figure/table.
