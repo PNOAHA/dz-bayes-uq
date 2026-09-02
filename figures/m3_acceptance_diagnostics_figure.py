@@ -30,7 +30,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
 
 HERE = Path(__file__).resolve().parent
-PARQUET = HERE / "grains_bayes_gpu.parquet"
+PARQUET = HERE.parent / "data" / "grains_bayes_gpu.parquet"
 BAND = (0.2, 0.5)                      # emcee healthy acceptance band
 GRP_C = {"NCC": "#CC79A7", "Songliao": "#595959"}
 HIGHLIGHT = "R31370-S12652"
@@ -81,9 +81,7 @@ def main():
              f"{frac_band*100:.1f}% of all\n181,500 fits\nin [0.2, 0.5]",
              ha="left", va="top", fontsize=7.3, color="0.2")
     axa.set_ylabel("fits (count)")
-    axa.set_title(f"MCMC acceptance fraction — emcee ensemble sampler "
-                  f"({nw} walkers × {ns:,} steps, 1000 burn-in)",
-                  fontsize=8.5, loc="left")
+    # 图级标题移除(2026-07-08):期刊惯例图名归 caption;采样器参数在 §3.4 与图注
     for sp in ("top", "right"):
         axa.spines[sp].set_visible(False)
     axa.text(-0.11, 1.0, "(a)", transform=axa.transAxes, fontsize=11, weight="bold", va="top")

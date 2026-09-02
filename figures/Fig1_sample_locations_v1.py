@@ -16,8 +16,8 @@ Coincident / near-coincident samples are merged to sites (rounded to 0.1 deg)
 for a single marker + label; the full sample -> coordinate table belongs in
 Table 1.
 
-Env: local Python 3.12 (C:/Users/Lenovo/AppData/Local/Programs/Python/Python312)
-with matplotlib; geo_primitives from ~/.claude/skills/geo-figures/scripts.
+Env: Python 3.12 + matplotlib. geo_primitives is imported from the copy bundled
+in this repository's code/ directory (added to sys.path below).
 
 History:
   - v1 (2026-07-04): first cut, adapted from dz-unmix-cg Fig 1 v1.
@@ -35,8 +35,8 @@ from matplotlib.patches import Rectangle, Polygon as MplPolygon
 from matplotlib.lines import Line2D
 import numpy as np
 
-SKILL_SCRIPTS = Path.home() / ".claude" / "skills" / "geo-figures" / "scripts"
-sys.path.insert(0, str(SKILL_SCRIPTS))
+CODE_DIR = Path(__file__).resolve().parents[1] / "code"   # bundled geo_primitives.py
+sys.path.insert(0, str(CODE_DIR))
 from geo_primitives import (        # noqa: E402
     apply_journal_rcparams, geographic_aspect, chaikin_smooth,
     add_polygon_collection, label_polygons,
@@ -287,8 +287,7 @@ def build_figure() -> plt.Figure:
                        arrowprops=dict(arrowstyle="-|>", color="#2B4F8F", lw=2.2, mutation_scale=14))
     legend_ax.text(0.16, y - 0.018, "Palaeo-Pacific\nplate vector", fontsize=7.5,
                    va="center", ha="left", linespacing=1.2); y -= 0.075
-    legend_ax.text(0.02, 0.02, "FGDC TM 11A02 line styles\nOkabe-Ito categorical palette",
-                   fontsize=7.0, color="#666666", va="bottom", ha="left", style="italic", linespacing=1.4)
+    # 制图规范注记移除(2026-07-08):工艺 meta 信息不上图面,归 caption/Methods
     return fig
 
 

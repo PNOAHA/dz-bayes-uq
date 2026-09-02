@@ -22,8 +22,9 @@ the soft arc/basement weights.
 Env: local Python 3.12 + numpy/pandas/pyarrow/matplotlib/scikit-learn.
 Out: FigY_nmf_comparison.{png,pdf} (300 dpi, GJ single/1.5-col).
 """
-from pathlib import Path
+import os
 import sys
+from pathlib import Path
 
 import matplotlib
 matplotlib.use("Agg")
@@ -33,9 +34,13 @@ import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
 HERE = Path(__file__).resolve().parent
-PARQUET = HERE / "grains_bayes_gpu.parquet"
-CG = HERE.parents[1] / "dz-unmix-cg"          # first paper (read-only import)
-AGES_DIR = HERE.parents[1] / "bayes_gpu" / "realdata_k1_samples"
+ROOT = HERE.parent
+PARQUET = ROOT / "data" / "grains_bayes_gpu.parquet"
+AGES_DIR = ROOT / "data" / "realdata_k1_samples"
+# First paper (supervised NMF), imported read-only. Documented cross-dependency:
+# a sibling checkout of https://github.com/PNOAHA/dz-unmix-cg. Override with the
+# DZ_UNMIX_CG env var if it lives elsewhere.
+CG = Path(os.environ.get("DZ_UNMIX_CG", str(ROOT.parent / "dz-unmix-cg")))
 
 sys.path.insert(0, str(CG))
 from dz_unmixing_experiment import (           # noqa: E402  (read-only reuse)
@@ -97,7 +102,7 @@ def main():
             ))
     tab = pd.DataFrame(rows)
     tab["absdiff"] = (tab["nmf"] - tab["bayes"]).abs()
-    tab.to_csv(HERE / "FigY_nmf_comparison_data.csv", index=False)
+    tab.to_csv(ROOT / "data" / "results" / "FigY_nmf_comparison_data.csv", index=False)
 
     mae = tab["absdiff"].mean()
     mae_hard = tab.loc[tab.em == "S3", "absdiff"].mean()
@@ -130,8 +135,8 @@ def main():
     ax.set_xlim(-0.03, 1.03)
     ax.set_ylim(-0.03, 1.03)
     ax.set_aspect("equal")
-    ax.set_xlabel("Supervised NMF point estimate  (first paper)")
-    ax.set_ylabel("Bayesian posterior mean $\\pm$ scan std  (this paper)")
+    ax.set_xlabel("Supervised NMF point estimate  (companion study)")
+    ax.set_ylabel("Bayesian posterior mean $\\pm$ scan std  (this study)")
     ax.grid(color="0.92", lw=0.4, zorder=0)
     ax.set_axisbelow(True)
     for sp in ("top", "right"):

@@ -30,7 +30,7 @@ import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
 HERE = Path(__file__).resolve().parent
-PARQUET = HERE / "grains_bayes_gpu.parquet"
+PARQUET = HERE.parent / "data" / "grains_bayes_gpu.parquet"
 
 REF_MU = {"S1": 130.0, "S2": 280.0, "S3": 1900.0}
 REF_SIG = {"S1": 15.0, "S2": 30.0, "S3": 100.0}
@@ -62,7 +62,7 @@ def main():
                         hspace=0.42, wspace=0.22)
 
     rows = [("mu", "$\\mu$  (peak age, Ma)", REF_MU, REL_MU),
-            ("sig", "$\\sigma$  (peak width, Ma)", REF_SIG, REL_SIG)]
+            ("sig", "$\\sigma$  (peak width, Myr)", REF_SIG, REL_SIG)]
 
     for ri, (par, row_lab, ref, rel) in enumerate(rows):
         for ci, k in enumerate(["S1", "S2", "S3"]):

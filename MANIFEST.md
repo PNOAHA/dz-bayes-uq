@@ -35,11 +35,11 @@ Curated 2026-07-04. Source directory:
 | file | figure | notes |
 |---|---|---|
 | `Fig1_sample_locations_v1.py` | Fig 1 | sample location map; needs `geo_primitives.py` (bundled in `code/`) |
-| `fig_bayes_uncertainty.py` | Fig 2 | ternary + dot-whisker |
-| `m3_variance_sources_figure.py` | Fig 3 | variance-source stacked bars |
-| `FigY_nmf_comparison.py` | Fig 4 | supervised-NMF vs Bayesian; needs first-paper `dz_unmixing_experiment.py` (DOI 10.5281/zenodo.20371892) |
+| `fig_bayes_uncertainty.py` | Fig 3 | ternary + dot-whisker |
+| `m3_variance_sources_figure.py` | Fig 4 | variance-source stacked bars |
+| `FigY_nmf_comparison.py` | Fig 6 | supervised-NMF vs Bayesian; needs first-paper `dz_unmixing_experiment.py` (concept DOI 10.5281/zenodo.20371891) |
 | `m3_mu_sigma_posterior_figure.py` | Fig 5 | end-member shape prior-vs-posterior |
-| `m3_acceptance_diagnostics_figure.py` | Fig 6 | MCMC acceptance diagnostics |
+| `m3_acceptance_diagnostics_figure.py` | Fig 2 | MCMC acceptance diagnostics |
 
 ### `data/`
 | path | description |
@@ -50,7 +50,7 @@ Curated 2026-07-04. Source directory:
 | `results/m3_nscaling_results.csv`, `results/m3_nscaling_curves.csv` | n-scaling fit + per-m curves |
 | `results/m3_within_vs_between_results.csv`, `results/m3_within_vs_between_soft.csv` | variance decomposition (per weight; soft axis) |
 | `results/m3_bootstrap_convergence_table.csv` | Table 2 source (σ_b/σ_100 per sample×weight×b) |
-| `results/FigY_nmf_comparison_data.csv` | Fig 4 source (NMF vs Bayesian, 4 NCC samples) |
+| `results/FigY_nmf_comparison_data.csv` | Fig 6 source (NMF vs Bayesian, 4 NCC samples) |
 
 ### `figures_rendered/`
 Published PNG + PDF (300 dpi) for all six figures; `Fig1_sample_locations` also as SVG.

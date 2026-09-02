@@ -2,6 +2,8 @@ cff-version: 1.2.0
 message: "If you use this code or data, please cite both the paper (preferred citation below) and this archive."
 title: "dz-bayes-uq: GPU-accelerated Bayesian uncertainty quantification for detrital-zircon provenance unmixing (code and data)"
 type: software
+version: 1.0.1
+date-released: 2026-09-02
 authors:
   - family-names: Pan
     given-names: Lujia
@@ -17,7 +19,7 @@ keywords:
   - MCMC
 preferred-citation:
   type: article
-  title: "Which mixing weights can you trust? GPU-accelerated Bayesian uncertainty quantification for detrital-zircon provenance unmixing of Lower Cretaceous samples from NE Asia"
+  title: "Grading the credibility of detrital-zircon mixing weights: GPU-accelerated Bayesian uncertainty quantification of Jurassic–Cretaceous samples from NE Asia"
   authors:
     - family-names: Pan
       given-names: Lujia

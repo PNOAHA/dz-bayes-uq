@@ -31,7 +31,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
 
 HERE = Path(__file__).resolve().parent
-RESULTS = HERE / "m3_within_vs_between_results.csv"
+RESULTS = HERE.parent / "data" / "results" / "m3_within_vs_between_results.csv"
 OUT = HERE / "m3_variance_sources"
 
 # ---- Geological Journal (Wiley) rcParams (mirror fig_bayes_uncertainty.py) ----

@@ -38,7 +38,9 @@ import numpy as np
 import pandas as pd
 
 HERE = Path(__file__).resolve().parent
-PARQUET = HERE / "grains_bayes_gpu.parquet"
+ROOT = HERE.parent
+RESULTS_DIR = ROOT / "data" / "results"
+PARQUET = ROOT / "data" / "grains_bayes_gpu.parquet"
 WK = ["S1", "S2", "S3"]
 MEAN = {k: f"w_{k}_mean" for k in WK}
 STD = {k: f"w_{k}_std" for k in WK}
@@ -112,7 +114,7 @@ def main():
                          f"available: {list(df.columns)}")
 
     eig = None
-    eig_path = HERE / "m3_eigen_results.csv"
+    eig_path = RESULTS_DIR / "m3_eigen_results.csv"
     if eig_path.exists():
         eig = pd.read_csv(eig_path).set_index("sample")
 
@@ -141,8 +143,9 @@ def main():
 
     res = pd.DataFrame(rows)
     soft = pd.DataFrame(soft_rows).sort_values(["group", "sample"]).reset_index(drop=True)
-    res.to_csv(HERE / "m3_within_vs_between_results.csv", index=False)
-    soft.to_csv(HERE / "m3_within_vs_between_soft.csv", index=False)
+    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    res.to_csv(RESULTS_DIR / "m3_within_vs_between_results.csv", index=False)
+    soft.to_csv(RESULTS_DIR / "m3_within_vs_between_soft.csv", index=False)
 
     # ---- verification: ANOVA identity + Table-1 cross-check ----------------
     max_resid = res["anova_resid"].max()

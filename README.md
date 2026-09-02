@@ -1,8 +1,8 @@
 # Bayesian detrital-zircon unmixing with full uncertainty quantification — code & data
 
-Supplementary code and data for the manuscript *"Which mixing weights can you
-trust? GPU-accelerated Bayesian uncertainty quantification for detrital-zircon
-provenance unmixing of Lower Cretaceous samples from NE Asia"* (Pan Lujia,
+Supplementary code and data for the manuscript *"Grading the credibility of
+detrital-zircon mixing weights: GPU-accelerated Bayesian uncertainty
+quantification of Jurassic–Cretaceous samples from NE Asia"* (Pan Lujia,
 submitted to *Computers & Geosciences*).
 
 This deposit lets a reader (i) re-analyse the full posterior scan without
@@ -47,29 +47,29 @@ python analysis/m3_nscaling_probe.py
 python analysis/m3_within_vs_between.py
 
 # re-render the figures (each writes PNG+PDF next to itself)
-python figures/fig_bayes_uncertainty.py            # Fig 2
-python figures/m3_variance_sources_figure.py       # Fig 3
+python figures/fig_bayes_uncertainty.py            # Fig 3
+python figures/m3_variance_sources_figure.py       # Fig 4
 python figures/m3_mu_sigma_posterior_figure.py     # Fig 5
-python figures/m3_acceptance_diagnostics_figure.py # Fig 6
-python figures/FigY_nmf_comparison.py              # Fig 4  (see cross-deps below)
+python figures/m3_acceptance_diagnostics_figure.py # Fig 2
+python figures/FigY_nmf_comparison.py              # Fig 6  (see cross-deps below)
 python figures/Fig1_sample_locations_v1.py         # Fig 1  (see cross-deps below)
 ```
 
-The figure scripts expect `grains_bayes_gpu.parquet` and
-`realdata_k1_samples/` to sit where `MANIFEST.md` places them (paths are
-resolved relative to each script); adjust the two module-level path constants
-at the top of a script if you relocate the data.
+All scripts resolve their inputs from `data/` relative to the repository root
+(`Path(__file__).resolve().parents[1] / "data"`), so they run from a clean
+checkout without editing any paths. Derived tables are written to
+`data/results/`; each figure script writes its PNG+PDF next to itself.
 
 ### Cross-dependencies (two figures)
 
 - **Fig 1** (`Fig1_sample_locations_v1.py`) imports map primitives from
   `geo_primitives.py`; a copy is bundled in `code/` by the assembler. It is
   self-contained matplotlib (no GIS stack).
-- **Fig 4** (`FigY_nmf_comparison.py`) applies the *first paper's* supervised-NMF
+- **Fig 6** (`FigY_nmf_comparison.py`) applies the *first paper's* supervised-NMF
   routine to the same real samples. It imports `dz_unmixing_experiment.py` from
   the first paper's repository, https://github.com/PNOAHA/dz-unmix-cg
   (preprint: https://ssrn.com/abstract=6955308); place that file on the Python
-  path to run Fig 4. (The first paper's end-members are identical to those used
+  path to run Fig 6. (The first paper's end-members are identical to those used
   here.)
 
 ## Reproducing the original GPU scan (optional, GPU)

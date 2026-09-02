@@ -22,7 +22,9 @@ import numpy as np
 import pandas as pd
 
 HERE = Path(__file__).resolve().parent
-CSV_DIR = HERE.parents[1] / "bayes_gpu" / "realdata_k1_samples"
+ROOT = HERE.parent
+RESULTS_DIR = ROOT / "data" / "results"
+CSV_DIR = ROOT / "data" / "realdata_k1_samples"
 
 ENDMEMBERS = np.array([[130.0, 15.0], [280.0, 30.0], [1900.0, 100.0]])
 E_S1S2 = np.array([1.0, -1.0, 0.0]) / np.sqrt(2.0)
@@ -73,7 +75,7 @@ def angle_deg(v, e):
 
 def main():
     rng = np.random.default_rng(SEED)
-    bayes = pd.read_csv(HERE / "m3_eigen_results.csv").set_index("sample")
+    bayes = pd.read_csv(RESULTS_DIR / "m3_eigen_results.csv").set_index("sample")
 
     rows, curves = [], []
     for csv in sorted(CSV_DIR.glob("*.csv")):
@@ -123,8 +125,9 @@ def main():
         ))
 
     res = pd.DataFrame(rows).sort_values(["group", "sample"]).reset_index(drop=True)
-    res.to_csv(HERE / "m3_nscaling_results.csv", index=False)
-    pd.DataFrame(curves).to_csv(HERE / "m3_nscaling_curves.csv", index=False)
+    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    res.to_csv(RESULTS_DIR / "m3_nscaling_results.csv", index=False)
+    pd.DataFrame(curves).to_csv(RESULTS_DIR / "m3_nscaling_curves.csv", index=False)
 
     with pd.option_context("display.width", 220, "display.max_columns", None):
         print("=== within-sample n-scaling (supervised EM, fixed shapes) ===")

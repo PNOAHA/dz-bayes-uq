@@ -13,8 +13,8 @@ container has no geo-figures helper module). Renders headless (Agg).
     is. The point: w_S3 (craton present?) whiskers ~0 (hard); w_S1/w_S2 (arc vs
     basement split) whiskers 0.05-0.12 (soft).
 
-Run (L20 container):  python fig_bayes_uncertainty.py
-Out:  /private/bayes_gpu/fig_bayes_uncertainty.{png,pdf}  (300 dpi, GJ double-col)
+Run:  python figures/fig_bayes_uncertainty.py
+Out:  fig_bayes_uncertainty.{png,pdf} written next to this script (300 dpi, GJ double-col)
 """
 from pathlib import Path
 
@@ -48,8 +48,8 @@ EM_LABEL = {"S1": "S1  Arc (130 Ma)", "S2": "S2  Basement (280 Ma)", "S3": "S3  
 GRP_C = {"NCC": OKABE_ITO["reddish_purple"], "Songliao": "#595959"}
 
 _HERE = Path(__file__).resolve().parent
-# local co-located parquet (was /private/bayes_gpu/out/ on the L20 container)
-PARQUET = str(_HERE / "grains_bayes_gpu.parquet")
+# full scan parquet from the repository's data/ directory
+PARQUET = str(_HERE.parent / "data" / "grains_bayes_gpu.parquet")
 OUT = str(_HERE / "fig_bayes_uncertainty")
 SQRT3_2 = np.sqrt(3) / 2.0
 

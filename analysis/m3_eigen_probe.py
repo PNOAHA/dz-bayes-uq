@@ -23,10 +23,14 @@ Cross-checks (zero compute, analytical):
 NOT part of the M1 probe2_* series (those eigendecompose Gram/Toeplitz
 matrices for the excess(K) derivation, not Bayesian posteriors).
 """
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 
-PARQUET = "grains_bayes_gpu.parquet"
+ROOT = Path(__file__).resolve().parents[1]
+RESULTS_DIR = ROOT / "data" / "results"
+PARQUET = ROOT / "data" / "grains_bayes_gpu.parquet"
 W_COLS = ["w_S1_mean", "w_S2_mean", "w_S3_mean"]
 # S1-S2 edge direction in weight space: trade w1 vs w2, w3 fixed
 E_S1S2 = np.array([1.0, -1.0, 0.0]) / np.sqrt(2.0)
@@ -89,7 +93,8 @@ def main():
         ))
 
     res = pd.DataFrame(rows).sort_values(["group", "sample"]).reset_index(drop=True)
-    res.to_csv("m3_eigen_results.csv", index=False)
+    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    res.to_csv(RESULTS_DIR / "m3_eigen_results.csv", index=False)
 
     with pd.option_context("display.width", 200, "display.max_columns", None):
         print("\n=== per-sample eigenstructure (full 121x100 grid) ===")
