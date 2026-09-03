@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 r"""Fig 1 (third / Bayesian-UQ paper) — sample location map of the fifteen
-Lower Cretaceous (K1) detrital-zircon samples on a NE-Asia tectonic basemap.
+Jurassic–Cretaceous detrital-zircon samples on a NE-Asia tectonic basemap.
 
 Reuses the tectonic framework of the first paper's Fig 1
 (`../../dz-unmix-cg/fig1_NEAsia_basemap.py`): extent, coastline, Cretaceous
@@ -268,12 +268,12 @@ def build_figure() -> plt.Figure:
         legend_ax.text(0.16, y - 0.018, label, fontsize=7.5, va="center", ha="left"); y -= 0.052
 
     L("Legend", fontsize=10, weight="bold"); y -= 0.012
-    L("K1 DZ samples (this study)", fontsize=8.5, weight="bold")
+    L("DZ samples (this study)", fontsize=8.5, weight="bold")
     marker_row("NCC north-margin (n = 4)", "s", GRP_C["NCC"])
     marker_row("Songliao Basin (n = 11)", "o", GRP_C["Songliao"])
     y -= 0.015
     L("Cretaceous basins", fontsize=8.5, weight="bold")
-    patch_row("Wide-rift / back-arc", BASIN_FAMILY_PALETTE["wide_rift"], "#5E3F87")
+    patch_row("Songliao / Hailar / Erlian", BASIN_FAMILY_PALETTE["wide_rift"], "#5E3F87")
     y -= 0.01
     L("Faults / sutures", fontsize=8.5, weight="bold")
     line_row("Certain (solid)", "-")
